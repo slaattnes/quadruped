@@ -306,7 +306,7 @@ def walk(robot, steps):
 
   robot.bend_up(FRONT_RIGHT, DELAY)
   robot.side_step(FRONT_RIGHT, DELAY)
-'''
+
   for _ in xrange(steps):
 
     print 'STEP ONE'
@@ -342,7 +342,6 @@ def walk(robot, steps):
   robot.rest_pose_simultaneously(DELAY)
   robot.high_pose_simultaneously(DELAY)
   robot.off()
-'''
 
 def walk_forward(steps = WALK_STEPS):
   LEGS = {
