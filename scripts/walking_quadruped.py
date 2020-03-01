@@ -4,7 +4,7 @@
 TEST = False
 
 INCREMENTS = 20
-WALK_STEPS = 1
+WALK_STEPS = 5
 DELAY = 0.3
 
 KNEE_BENTUP = 10
@@ -343,6 +343,7 @@ def walk(robot, steps):
   robot.high_pose_simultaneously(DELAY)
   robot.off()
 
+
 def walk_forward(steps = WALK_STEPS):
   LEGS = {
     'front left': LEG_1,
@@ -352,19 +353,6 @@ def walk_forward(steps = WALK_STEPS):
   }
 
   print('Walk forward.......')
-  robot = QuadrupedCore(LEGS)
-  walk(robot, steps)
-
-
-def walk_left(steps = WALK_STEPS):
-  LEGS = {
-    'front left': LEG_3,
-    'front right': LEG_1,
-    'back left': LEG_4,
-    'back right': LEG_2
-  }
-
-  print('Walk left.......')
   robot = QuadrupedCore(LEGS)
   walk(robot, steps)
 
@@ -382,23 +370,45 @@ def walk_backward(steps = WALK_STEPS):
   walk(robot, steps)
 
 
-def walk_right(steps = WALK_STEPS):
-  LEGS = {
-    'front left': LEG_2,
-    'front right': LEG_4,
-    'back left': LEG_1,
-    'back right': LEG_3
+def rotate_cw(steps = WALK_STEPS):
+
+  TWIST_HIP = 30
+  twist_angles = {
+    'front left': {'hip': -TWIST_HIP, 'knee': KNEE_REST, 'ankle': ANKLE_REST},
+    'front right': {'hip': TWIST_HIP, 'knee': KNEE_REST, 'ankle': ANKLE_REST},
+    'back left': {'hip': TWIST_HIP, 'knee': KNEE_REST, 'ankle': ANKLE_REST},
+    'back right': {'hip': -TWIST_HIP, 'knee': KNEE_REST, 'ankle': ANKLE_REST}
   }
 
-  print('Walk right.......')
-  robot = QuadrupedCore(LEGS)
-  walk(robot, steps)
+  LEGS = {
+    'front left': LEG_1,
+    'front right': LEG_2,
+    'back left': LEG_3,
+    'back right': LEG_4
+  }
 
+  robot = QuadrupedCore(LEGS)
+
+  robot.zero_pose(DELAY)
+  robot.rest_pose_simultaneously(DELAY)
+
+  for _ in xrange(steps):
+    print "Twist."
+    robot.propel_slowly(twist_angles, DELAY)
+
+    for leg_position in [FRONT_LEFT, BACK_LEFT, BACK_RIGHT, FRONT_RIGHT]:
+      print "Replant one foot."
+      robot.bend_up(leg_position, DELAY)
+      robot.slow_pose(leg_position, HIP_REST, KNEE_REST, ANKLE_REST, DELAY)
+
+  robot.zero_pose(DELAY)
+  robot.rest_pose_simultaneously(DELAY)
+  robot.high_pose_simultaneously(DELAY)
+  robot.off()
 
 # -----------------------
 # IMPORTANT: LOOK HERE!
 # -----------------------
 walk_forward(steps=WALK_STEPS)
 walk_backward(steps=WALK_STEPS)
-walk_right(steps=WALK_STEPS)
-walk_left(steps=WALK_STEPS)
+rotate_cw(steps=WALK_STEPS)
