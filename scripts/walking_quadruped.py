@@ -5,22 +5,22 @@ TEST = False
 
 INCREMENTS = 20
 WALK_STEPS = 5
-DELAY = 0.5
+DELAY = 0.3
 
 KNEE_BENTUP = 10
 ANKLE_BENTUP = -10
 
 HIP_SIDESTEP = -60
 KNEE_SIDESTEP = -30
-ANKLE_SIDESTEP = 30
+ANKLE_SIDESTEP = 40
 
 HIP_REACH = 10
 KNEE_REACH = -25
-ANKLE_REACH = 30
+ANKLE_REACH = 40
 
 HIP_REST = -10
 KNEE_REST = -30
-ANKLE_REST = 30
+ANKLE_REST = 40
 
 #----------------------------
 # PACKAGES, HELPERS, DRIVER SETUP
@@ -184,7 +184,7 @@ class QuadrupedCore:
     self.slow_pose(position, HIP_REACH, KNEE_REACH, ANKLE_REACH, delay)
 
   def high_pose_simultaneously(self, delay):
-    self.move_joints_simultaneously(0, -90, 90, delay)
+    self.move_joints_simultaneously(0, -80, 80, delay)
 
   def rest_pose_simultaneously(self, delay):
     self.move_joints_simultaneously(HIP_REST, KNEE_REST, ANKLE_REST, delay)
