@@ -3,7 +3,7 @@
 #----------------------------
 TEST = False
 
-INCREMENTS = 40
+INCREMENTS = 10
 WALK_STEPS = 5
 DELAY = 0.25
 
