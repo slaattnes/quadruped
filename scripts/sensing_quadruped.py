@@ -458,7 +458,7 @@ if TEST == False:
   adc = Adafruit_ADS1x15.ADS1115(address=SENSOR_I2C_ADDRESS, busnum=I2C_BUS_NUM)
 
   while True:
-    env_sensor_value = adc.read_adc_difference(CHANNEL_DIFF_ENV_SENSOR, gain=GAIN)
+    env_sensor_value = adc.read_adc(CHANNEL_DIFF_ENV_SENSOR, gain=GAIN)
     perimeter_sensor0_value = adc.read_adc(CHANNEL_PERIMETER0, gain=GAIN)
     perimeter_sensor1_value = adc.read_adc(CHANNEL_PERIMETER1, gain=GAIN)
 
