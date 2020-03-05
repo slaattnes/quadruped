@@ -138,7 +138,7 @@ class QuadrupedCore:
 
     dt = delay / INCREMENTS
 
-    for _ in xrange(INCREMENTS):
+    for _ in range(INCREMENTS):
       hip.move_by(dh)
       knee.move_by(dk)
       ankle.move_by(da)
@@ -152,7 +152,7 @@ class QuadrupedCore:
     da = ankle.get_movement_increment(ANKLE_BENTUP, INCREMENTS)
     dt = delay / INCREMENTS
 
-    for _ in xrange(INCREMENTS):
+    for _ in range(INCREMENTS):
       knee.move_by(dk)
       ankle.move_by(da)
       sleep(dt)
@@ -172,7 +172,7 @@ class QuadrupedCore:
         'ankle': da
       }
 
-    for _ in xrange(INCREMENTS):
+    for _ in range(INCREMENTS):
       for position, joints in self.legs.items():
 
         dh = d_angles[position]['hip']
@@ -227,7 +227,7 @@ class QuadrupedCore:
     # move a little, at each increment count
     # --------
     dt = delay / INCREMENTS
-    for _ in xrange(INCREMENTS):
+    for _ in range(INCREMENTS):
       for position, joints in self.legs.items():
 
         dh = d_angles[position]['hip']
@@ -316,7 +316,7 @@ def walk(robot, steps):
   # side step backward of front right leg
   robot.side_step(FRONT_RIGHT, DELAY)
 
-  for _ in xrange(steps):
+  for _ in range(steps):
 
     # from starting position
     # side step forward of back right leg
@@ -392,7 +392,7 @@ def rotate(twist_angles, steps):
   robot.zero_pose(DELAY)
   robot.rest_pose_simultaneously(DELAY)
 
-  for _ in xrange(steps):
+  for _ in range(steps):
     print("Twist.")
     robot.propel_slowly(twist_angles, DELAY)
 
