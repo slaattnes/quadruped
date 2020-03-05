@@ -3,7 +3,7 @@
 #----------------------------
 TEST = False
 
-INCREMENTS = 20
+INCREMENTS = 10
 WALK_STEPS = 5
 DELAY = 0.25
 
@@ -462,9 +462,9 @@ if TEST == False:
     perimeter_sensor0_value = adc.read_adc(CHANNEL_PERIMETER0, gain=GAIN)
     perimeter_sensor1_value = adc.read_adc(CHANNEL_PERIMETER1, gain=GAIN)
 
-    print("perimeter_sensor0_value: ", perimeter_sensor0_value)
-    print("perimeter_sensor1_value: ", perimeter_sensor1_value)
-    print("env_sensor_value: ", env_sensor_value)
+    print('perimeter_sensor0_value: ', perimeter_sensor0_value)
+    print('perimeter_sensor1_value: ', perimeter_sensor1_value)
+    print('env_sensor_value: ', env_sensor_value)
 
     # Change this to be greater than or less than
     if perimeter_sensor0_value > ENV_SENSOR_THRESHOLD or perimeter_sensor1_value > ENV_SENSOR_THRESHOLD:
