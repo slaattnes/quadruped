@@ -427,6 +427,17 @@ def rotate_ccw(steps=WALK_STEPS):
   print('Rotate counterclockwise')
   rotate(twist_angles, steps)
 
+def make_robot():
+  LEGS = {
+    'front left': LEG_1,
+    'front right': LEG_2,
+    'back left': LEG_3,
+    'back right': LEG_4
+  }
+
+  robot = QuadrupedCore(LEGS)
+  return robot
+
 # -----------------------
 # IMPORTANT: LOOK HERE!
 # -----------------------
@@ -452,28 +463,43 @@ VAL_0 = -75
 VAL_1 = 50
 VAL_2 = 225
 
+import time
+seconds = time.time()
+print("Seconds since epoch =", seconds)	
+
+NUMBER_OF_SECONDS_RUNNING = 300
+NUMBER_OF_SECONDS_REST = 60
+
 if TEST == False:
   import Adafruit_ADS1x15
   # https://github.com/adafruit/Adafruit_Python_ADS1x15
   adc = Adafruit_ADS1x15.ADS1115(address=SENSOR_I2C_ADDRESS, busnum=I2C_BUS_NUM)
 
   while True:
-    env_sensor_value = adc.read_adc_difference(CHANNEL_DIFF_ENV_SENSOR, gain=GAIN)
-    perimeter_sensor0_value = adc.read_adc(CHANNEL_PERIMETER0, gain=GAIN)
-    perimeter_sensor1_value = adc.read_adc(CHANNEL_PERIMETER1, gain=GAIN)
+    start_of_timer = time.time()
+    
+    while time.time() - start_of_timer < NUMBER_OF_SECONDS_RUNNING:
+      
+      env_sensor_value = adc.read_adc_difference(CHANNEL_DIFF_ENV_SENSOR, gain=GAIN)
+      perimeter_sensor0_value = adc.read_adc(CHANNEL_PERIMETER0, gain=GAIN)
+      perimeter_sensor1_value = adc.read_adc(CHANNEL_PERIMETER1, gain=GAIN)
 
-    print('perimeter_sensor0_value: ', perimeter_sensor0_value)
-    print('perimeter_sensor1_value: ', perimeter_sensor1_value)
-    print('env_sensor_value: ', env_sensor_value)
+      print("perimeter_sensor0_value: ", perimeter_sensor0_value)
+      print("perimeter_sensor1_value: ", perimeter_sensor1_value)
+      print("env_sensor_value: ", env_sensor_value)
 
-    # Change this to be greater than or less than
-    if perimeter_sensor0_value > ENV_SENSOR_THRESHOLD or perimeter_sensor1_value > ENV_SENSOR_THRESHOLD:
-      walk_backward(steps=STEPS)
-    elif env_sensor_value <= VAL_0:
-      rotate_cw(steps=STEPS)
-    elif VAL_0 < env_sensor_value <= VAL_1:
-      rotate_ccw(steps=STEPS)
-    elif VAL_1 < env_sensor_value <= VAL_2:
-      walk_forward(steps=STEPS)
-    else:
-      walk_backward(steps=STEPS)
+      # Change this to be greater than or less than
+      if perimeter_sensor0_value > ENV_SENSOR_THRESHOLD or perimeter_sensor1_value > ENV_SENSOR_THRESHOLD:
+        walk_backward(steps=STEPS)
+      elif env_sensor_value <= VAL_0:
+        rotate_cw(steps=STEPS)
+      elif VAL_0 < env_sensor_value <= VAL_1:
+        rotate_ccw(steps=STEPS)
+      elif VAL_1 < env_sensor_value <= VAL_2:
+        walk_forward(steps=STEPS)
+      else:
+        walk_backward(steps=STEPS)
+    
+    robot = make_robot()
+    robot.off()
+    sleep(NUMBER_OF_SECONDS_REST)
