@@ -468,7 +468,7 @@ seconds = time.time()
 print("Seconds since epoch =", seconds)	
 
 NUMBER_OF_SECONDS_RUNNING = 240
-NUMBER_OF_SECONDS_REST = 60
+NUMBER_OF_SECONDS_REST = 120
 
 if TEST == False:
   import Adafruit_ADS1x15
