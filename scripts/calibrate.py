@@ -26,7 +26,7 @@ def get_channel():
       print("That is not an integer. Try again.")
       continue
 
-    if ch > 0 and ch < 12:
+    if ch >= 0 and ch < 12:
       break
 
     print("Please input a number from 0 to 11.")
