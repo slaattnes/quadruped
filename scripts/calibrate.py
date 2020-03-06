@@ -74,7 +74,7 @@ while True:
     print("press y if so.")
     print("or press enter to calibrate the same channel.")
     
-    should_change = input("y/_")
+    should_change = input("y/_: ")
 
     if should_change == 'y':
       break
