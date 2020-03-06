@@ -3,7 +3,7 @@ from time import sleep
 
 # CALIBRATION
 
-driver = PWM(0x40)
+driver = PWM(0x41)
 driver.setPWMFreq(50)
  
 print("Hello world!")
