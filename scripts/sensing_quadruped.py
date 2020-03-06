@@ -467,7 +467,7 @@ import time
 seconds = time.time()
 print("Seconds since epoch =", seconds)	
 
-NUMBER_OF_SECONDS_RUNNING = 300
+NUMBER_OF_SECONDS_RUNNING = 240
 NUMBER_OF_SECONDS_REST = 60
 
 if TEST == False:
