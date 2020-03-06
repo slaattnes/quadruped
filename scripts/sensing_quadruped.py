@@ -501,5 +501,8 @@ if TEST == False:
         walk_backward(steps=STEPS)
     
     robot = make_robot()
+    robot.rest_pose_simultaneously(DELAY)
+    robot.high_pose_simultaneously(DELAY) 
+    
     robot.off()
     sleep(NUMBER_OF_SECONDS_REST)
