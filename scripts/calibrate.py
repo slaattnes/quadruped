@@ -61,7 +61,6 @@ while True:
     val = get_pwm_value()
 
     print(f"Setting pwm value of channel {ch} to {val} for {seconds} second(s)...")
-    
     driver.setPWM(ch, 0, val)
     sleep(seconds)
     
@@ -73,8 +72,7 @@ while True:
     print("Do you want to calibrate a different channel?")
     print("press y if so.")
     print("or press enter to calibrate the same channel.")
-    
-    should_change = input("y/_")
+    should_change = input("y/_: ")
 
     if should_change == 'y':
       break
