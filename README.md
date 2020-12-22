@@ -1,5 +1,5 @@
 # Quadruped
-
+![Plant Cyborg portrait](attachment:/img/Plant Cyborg portrait-web.jpg)
 # References 
 - [Tote Robot](https://tote.readthedocs.io/en/latest/gait.html)
 - [Josh Elijah](https://makezine.com/2016/11/22/robot-quadruped-arduino-program/)
